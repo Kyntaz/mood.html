@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>mood.html</title>
-</head>
-<body>
-    <h1>mood.html</h1>
-    <input type="date" id="date-picker">
-    <button onclick="goto()">get mood</button>
-
-    <script>
-        function goto() {
-            let datePicker = document.getElementById("date-picker");
-            let date = datePicker.value.replaceAll("-", "");
-            location.assign(`/mood.html/mood/${date}/`);
-        }
-    </script>
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>mood.html</title>
+    </head>
+    <body>
+        <h1>mood.html</h1>
+        <ul id="list"></ul>
+    
+        <script type="module">
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            for (const day = new Date(2022, 9, 1); day < today; day.setDate(day.getDate() + 1)) {
+                const link = document.createElement("a");
+                const year = day.getFullYear().toString();
+                const month = (day.getMonth() + 1).toString();
+                const date = day.getDate().toString().padStart(2, "0");
+                link.href = `${location.href}/mood/${year}${month}${date}`
+                    .replace(/([^:]\/)\//g, "$1");
+                link.innerHTML = `${year}-${month}-${date}`;
+                const item = document.createElement("li");
+                item.appendChild(link);
+                document.getElementById("list").appendChild(item);
+            }
+        </script>
+    </body>
+</html>
