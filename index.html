@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>mood.html</title>
+</head>
+<body>
+    <h1>mood.html</h1>
+    <input type="date" id="date-picker">
+    <button onclick="goto()">get mood</button>
+
+    <script>
+        function goto() {
+            let datePicker = document.getElementById("date-picker");
+            let date = datePicker.value.replaceAll("-", "");
+            location.assign(`/mood/${date}/`);
+        }
+    </script>
+</body>
